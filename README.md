@@ -1,4 +1,4 @@
-# FoxetGSItool-builder
+# FoxetGSITool-builder
 
 ## How to use :
 1. Fork this repo
