@@ -27,9 +27,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Clone FoxetGSI-tool
+      - name: Clone AndroDumb/FoxetGSITool
         run: |
-          git clone --recurse-submodules https://github.com/FoxetGSI/FoxetGSI-tool.git
+          git clone --recurse-submodules https://github.com/AndroDumb/FoxetGSITool.git
       - name: Install dependencies
         run: |
           cd FoxetGSI-tool
@@ -54,7 +54,7 @@ jobs:
       - name: Process and Package Files
         id: package
         run: |
-          cd $GITHUB_WORKSPACE/FoxetGSI-tool/output || exit 1
+          cd $GITHUB_WORKSPACE/FoxetGSITool/output || exit 1
           if [ $(ls -1 *.img 2>/dev/null | wc -l) -eq 0 ]; then
             echo "::error::No .img files found!"
             exit 1
