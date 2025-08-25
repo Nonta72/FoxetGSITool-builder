@@ -32,7 +32,7 @@ jobs:
           git clone --recurse-submodules https://github.com/AndroDumb/FoxetGSITool.git
       - name: Install dependencies
         run: |
-          cd FoxetGSI-tool
+          cd FoxetGSITool
           sudo bash setup.sh
           sudo apt-get install -y p7zip-full
       - name: Build GSI
@@ -41,7 +41,7 @@ jobs:
           ROM_LINK: ${{ github.event.inputs.rom_link }}
           ROM_TYPE_OPTION: ${{ github.event.inputs.rom_type_option }}
         run: |
-          cd FoxetGSI-tool
+          cd FoxetGSITool
           if [ "$ROM_TYPE_OPTION" = "AB" ]; then
             sudo bash url2GSI.sh "$ROM_LINK" "$ROM_TYPE" --ab
           else
