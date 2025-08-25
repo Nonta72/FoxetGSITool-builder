@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd FoxetGSITool
-          sudo bash setup.sh
+          sudo bash FoxetGSITool.sh
           sudo apt-get install -y p7zip-full
       - name: Build GSI
         env:
