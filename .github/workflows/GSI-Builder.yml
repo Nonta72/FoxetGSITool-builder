@@ -30,11 +30,13 @@ jobs:
       - name: Clone AndroDumb/FoxetGSITool
         run: |
           git clone --recurse-submodules https://github.com/AndroDumb/FoxetGSITool.git
+
       - name: Install dependencies
         run: |
           cd FoxetGSITool
           sudo bash FoxetGSITool.sh
           sudo apt-get install -y p7zip-full
+
       - name: Build GSI
         env:
           ROM_TYPE: ${{ github.event.inputs.rom_type }}
@@ -47,10 +49,20 @@ jobs:
           else
             sudo bash LinkToGSI.sh "$ROM_LINK" "$ROM_TYPE" --aonly
           fi
+
       - name: Prepare artifacts directory
         run: |
           mkdir -p $GITHUB_WORKSPACE/artifacts
           sudo chmod -R 777 $GITHUB_WORKSPACE/artifacts
+
+      - name: Move images to output directory (compatibilidad Output/output)
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/FoxetGSITool/output
+          if [ -d "$GITHUB_WORKSPACE/FoxetGSITool/Output" ]; then
+            cp $GITHUB_WORKSPACE/FoxetGSITool/Output/*.img $GITHUB_WORKSPACE/FoxetGSITool/output/ 2>/dev/null || true
+            cp $GITHUB_WORKSPACE/FoxetGSITool/Output/*.txt $GITHUB_WORKSPACE/FoxetGSITool/output/ 2>/dev/null || true
+          fi
+
       - name: Process and Package Files
         id: package
         run: |
@@ -74,6 +86,7 @@ jobs:
             echo "file_name=${base_name}.7z" >> $GITHUB_OUTPUT
             echo "txt_file=${txt_file}" >> $GITHUB_OUTPUT
           done
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
