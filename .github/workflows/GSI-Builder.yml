@@ -35,7 +35,8 @@ jobs:
         run: |
           cd FoxetGSITool
           sudo bash FoxetGSITool.sh
-          sudo apt-get install -y p7zip-full
+          sudo apt-get install -y p7zip-full unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract rename liblzma-dev python-pip brotli lz4 protobuf-compiler git gawk
+          pip install backports.lzma protobuf pycrypto twrpdtgen extract-dtb pycryptodome
 
       - name: Build GSI
         env:
